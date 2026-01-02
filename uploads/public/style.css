@@ -1,0 +1,488 @@
+/* ===============================
+   HEALTHCARE AI UI THEME
+   Single-file Style System
+   =============================== */
+
+/* ---------- Design Tokens ---------- */
+:root {
+    --primary: #7030EF;
+    --secondary: #DB1FFF;
+    --bg-dark: #090820;
+
+    --glass-1: rgba(255, 255, 255, 0.06);
+    --glass-2: rgba(255, 255, 255, 0.1);
+    --border-glass: rgba(255, 255, 255, 0.15);
+
+    --text-main: #ffffff;
+    --text-muted: #b9b6d3;
+
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+
+    --glow-primary: 0 0 30px rgba(112, 48, 239, 0.55);
+    --glow-secondary: 0 0 30px rgba(219, 31, 255, 0.55);
+
+    --font-main: "General Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ---------- Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- Body ---------- */
+body {
+    height: 100vh;
+    font-family: var(--font-main);
+    color: var(--text-main);
+    background:
+        radial-gradient(circle at top right, #3a176f, transparent 40%),
+        radial-gradient(circle at bottom left, #1c1244, transparent 40%),
+        var(--bg-dark);
+    overflow: hidden;
+}
+
+/* ---------- App Layout ---------- */
+.app {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 16px;
+    padding: 16px;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+    background: linear-gradient(180deg,
+            rgba(112, 48, 239, 0.28),
+            rgba(9, 8, 32, 0.95));
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--glow-primary);
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.sidebar p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* ---------- Chat Area ---------- */
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.02));
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: blur(18px);
+    max-width: 1400px;
+    /* adjust value */
+    margin: 0 auto;
+    /* center it */
+    width: 100%;
+
+
+}
+
+/* ---------- Messages ---------- */
+#chat {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+#chat p {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    margin-bottom: 14px;
+    line-height: 1.55;
+    font-size: 15px;
+}
+
+/* User Message */
+#chat p:nth-child(odd) {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: var(--glow-secondary);
+}
+
+/* Bot Message */
+#chat p:nth-child(even) {
+    background: var(--glass-1);
+    border: 1px solid var(--border-glass);
+}
+
+/* ---------- Controls ---------- */
+.controls {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    border-top: 1px solid var(--border-glass);
+}
+
+.controls input[type="text"] {
+    flex: 1;
+    padding: 14px 16px;
+    background: var(--glass-2);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    outline: none;
+}
+
+.controls input::placeholder {
+    color: var(--text-muted);
+}
+
+.controls button {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: var(--glow-primary);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-secondary);
+}
+
+.controls input[type="file"] {
+    background: var(--glass-2);
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Assistant Panel ---------- */
+.assistant {
+    background: linear-gradient(180deg,
+            rgba(219, 31, 255, 0.22),
+            rgba(9, 8, 32, 0.95));
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-glass);
+    padding: 16px;
+    text-align: center;
+    box-shadow: var(--glow-secondary);
+}
+
+.assistant img {
+    width: 120px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 20px rgba(219, 31, 255, 0.6));
+}
+
+.assistant p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary), var(--secondary));
+    border-radius: 10px;
+}
+
+.sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ===============================
+   TOP BAR
+   =============================== */
+.top-bar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-glass);
+}
+
+/* ===============================
+   PROFILE ICON
+   =============================== */
+.profile {
+    position: relative;
+}
+
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--border-glass);
+    box-shadow: var(--glow-primary);
+}
+
+/* ===============================
+   PROFILE MENU (HIDDEN BY DEFAULT)
+   =============================== */
+.profile-menu {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 160px;
+
+    background: linear-gradient(180deg,
+            rgba(112, 48, 239, 0.35),
+            rgba(9, 8, 32, 0.95));
+
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glow-secondary);
+
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* ===============================
+   PROFILE MENU OPEN STATE
+   =============================== */
+.profile-menu.open {
+    display: flex;
+}
+
+/* ===============================
+   PROFILE MENU BUTTONS
+   =============================== */
+.profile-menu button {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    padding: 14px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.profile-menu button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Center title in top bar */
+.medic-title {
+    text-align: center;
+}
+
+.medic-title h3 {
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+/* Input wrapper for positioning */
+.input-wrapper {
+    position: relative;
+    padding-top: 20px;
+}
+
+/* Medic avatar near input */
+.medic-avatar-bottom {
+    position: absolute;
+    left: 14px;
+    bottom: 18px;
+    width: 70px;
+    pointer-events: none;
+    animation: medicFloat 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(219, 31, 255, .7));
+}
+
+/* Floating animation */
+@keyframes medicFloat {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Push input to the right so it doesn’t overlap avatar */
+.controls {
+    padding-left: 90px;
+}
+
+/* Sidebar default */
+.sidebar {
+    transition: width .3s ease, padding .3s ease;
+}
+
+/* Collapsed sidebar */
+.sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+}
+
+/* Main area expands automatically */
+.sidebar.collapsed+.chat-area {
+    grid-column: 1 / -1;
+}
+
+/* Profile container */
+.profile {
+    position: relative;
+}
+
+/* Profile image */
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--border-glass);
+    box-shadow: var(--glow-primary);
+}
+
+/* Profile dropdown menu */
+.profile-menu {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 160px;
+
+    background: linear-gradient(180deg,
+            rgba(112, 48, 239, .35),
+            rgba(9, 8, 32, .95));
+
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    box-shadow: var(--glow-secondary);
+
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* Open state */
+.profile-menu.open {
+    display: flex;
+}
+
+/* Menu buttons */
+.profile-menu button {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    padding: 14px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.profile-menu button:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===============================
+   LOGIN PAGE STYLES
+   =============================== */
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(circle at top right, #3a176f, transparent 40%),
+        radial-gradient(circle at bottom left, #1c1244, transparent 40%),
+        var(--bg-dark);
+}
+
+/* Login Card */
+.login-card {
+    width: 360px;
+    padding: 32px 28px;
+
+    background: linear-gradient(160deg,
+            rgba(255, 255, 255, 0.10),
+            rgba(255, 255, 255, 0.03));
+
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-glass);
+    backdrop-filter: blur(18px);
+
+    box-shadow: var(--glow-primary);
+    text-align: center;
+}
+
+/* Title */
+.login-card h2 {
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.login-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+/* Input */
+.login-card input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+
+    color: var(--text-main);
+    outline: none;
+}
+
+.login-card input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Button */
+.login-card button {
+    width: 100%;
+    padding: 14px;
+
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: var(--radius-sm);
+
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+
+    box-shadow: var(--glow-secondary);
+    transition: transform 0.15s ease;
+}
+
+.login-card button:hover {
+    transform: translateY(-2px);
+}

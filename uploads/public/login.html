@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login | HealthMate</title>
+
+    <!-- Main App Styles -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="login-page">
+
+    <div class="login-card">
+        <h2>Welcome to HealthMate</h2>
+        <p>Your trusted medical assistant</p>
+
+        <input type="text" id="username" placeholder="Enter your e-mail" autocomplete="off" />
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        // If already logged in, skip login page
+        if (localStorage.getItem("user")) {
+            window.location.href = "index.html";
+        }
+
+        function login() {
+            const username = document.getElementById("username").value.trim();
+
+            if (!username) {
+                alert("Please enter your name");
+                return;
+            }
+
+            localStorage.setItem("user", username);
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>
