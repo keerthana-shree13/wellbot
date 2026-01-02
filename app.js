@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function botReply(userText) {
         let reply =
-            "I’m here to help. Based on your symptoms, please consult a certified doctor for proper diagnosis.";
+            "Hey there! I'm Medic, your virtual health assistant. How can I help you today?";
 
         if (userText.toLowerCase().includes("fever")) {
             reply =
