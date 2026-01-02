@@ -486,3 +486,52 @@ body {
 .login-card button:hover {
     transform: translateY(-2px);
 }
+
+.profile-icon,
+.medic-avatar-bottom {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 9999;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE FIX
+   =============================== */
+
+@media (max-width: 768px) {
+    .app {
+        grid-template-columns: 1fr;
+        padding: 8px;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .chat-area {
+        max-width: 100%;
+        height: calc(100vh - 16px);
+    }
+
+    #chat {
+        padding: 16px;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        padding-left: 16px;
+    }
+
+    .controls input[type="text"] {
+        width: 100%;
+    }
+
+    .controls button {
+        flex: 1;
+    }
+
+    .medic-avatar-bottom {
+        display: none;
+    }
+}

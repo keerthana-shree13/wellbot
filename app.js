@@ -1,47 +1,44 @@
-async function send() {
-    const input = document.getElementById("input");
+document.addEventListener("DOMContentLoaded", () => {
     const chat = document.getElementById("chat");
+    const input = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
 
-    chat.innerHTML += `<p><b>You:</b> ${input.value}</p>`;
+    function addMessage(text, sender) {
+        const msg = document.createElement("p");
+        msg.textContent = text;
+        msg.className = sender;
+        chat.appendChild(msg);
+        chat.scrollTop = chat.scrollHeight;
+    }
 
-    const res = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input.value })
+    function botReply(userText) {
+        let reply =
+            "I’m here to help. Based on your symptoms, please consult a certified doctor for proper diagnosis.";
+
+        if (userText.toLowerCase().includes("fever")) {
+            reply =
+                "Fever can indicate infection or inflammation. Stay hydrated and consult a doctor if it persists.";
+        } else if (userText.toLowerCase().includes("headache")) {
+            reply =
+                "Headaches may occur due to stress, dehydration, or illness. Rest and medical advice are recommended.";
+        }
+
+        setTimeout(() => {
+            addMessage(reply, "bot");
+        }, 600);
+    }
+
+    sendBtn.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (!text) return;
+
+        addMessage(text, "user");
+        input.value = "";
+        botReply(text);
     });
 
-    const data = await res.json();
-    chat.innerHTML += `<p><b>Medi:</b> ${data.reply}</p>`;
-    input.value = "";
-}
-
-function voice() {
-    const recognition = new webkitSpeechRecognition();
-    recognition.onresult = e => {
-        document.getElementById("input").value = e.results[0][0].transcript;
-    };
-    recognition.start();
-}
-
-async function upload(fileInput) {
-    const formData = new FormData();
-    formData.append("report", fileInput.files[0]);
-
-    const res = await fetch("/upload", {
-        method: "POST",
-        body: formData
+    input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendBtn.click();
     });
-
-    const data = await res.json();
-    document.getElementById("chat").innerHTML += `<p><b>Medi:</b> ${data.summary}</p>`;
-}
-
-const express = require("express");
-const app = express();
-
-app.use(express.json());
-app.use(express.static("uploads/public"));
-
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
 });
+
